@@ -162,8 +162,9 @@
     if (segmentControl.selectedSegmentIndex == 0) {
         
         NSString *task = [tvArray objectAtIndex:indexPath.row];
-        
-        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM DEVICE_TABLE WHERE DEVICE_ID = '%@'",task.uppercaseString];
+        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM DEVICE_TABLE WHERE DEVICE_ID = '%@'",[task valueForKey:@"tv_id"]];
+
+//        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM DEVICE_TABLE WHERE DEVICE_ID = '%@'",task.uppercaseString];
         
         if ([[CPDatabaseManager sharedManager]executeQuery:deleteQuery] == 1) {
             NSLog(@"Successfully Deleted");
@@ -177,8 +178,9 @@
     else if (segmentControl.selectedSegmentIndex == 1) {
         
         NSString *task = [mobileArray objectAtIndex:indexPath.row];
-        
-        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM DEVICE_TABLE WHERE DEVICE_ID = '%@'",task.uppercaseString];
+        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM DEVICE_TABLE WHERE DEVICE_ID = '%@'",[task valueForKey:@"mobile_id"]];
+
+//        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM DEVICE_TABLE WHERE DEVICE_ID = '%@'",task.uppercaseString];
         
         if ([[CPDatabaseManager sharedManager]executeQuery:deleteQuery] == 1) {
             NSLog(@"Successfully Deleted");
@@ -193,8 +195,9 @@
     else if (segmentControl.selectedSegmentIndex == 2) {
         
         NSString *task = [acArray objectAtIndex:indexPath.row];
-        
-        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM DEVICE_TABLE WHERE DEVICE_ID = '%@'",task.uppercaseString];
+        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM DEVICE_TABLE WHERE DEVICE_ID = '%@'",[task valueForKey:@"ac_id"]];
+
+//        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM DEVICE_TABLE WHERE DEVICE_ID = '%@'",task.uppercaseString];
         
         if ([[CPDatabaseManager sharedManager]executeQuery:deleteQuery] == 1) {
             NSLog(@"Successfully Deleted");

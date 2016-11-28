@@ -78,32 +78,36 @@
                     
                     if (result == 1) {
                         NSLog(@"Successfully inserted data");
+                        [self showAlertWithTitle:@"OK" message:[NSString stringWithFormat:@"Successfully inserted data"]];
+
                     }
                     else if (result == 1){
                         NSLog(@"Successfully inserted data");
+                        [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Unable to insert data"]];
+
                         
                     }
-                    else if (result == 1){
-                        NSLog(@"Successfully inserted data");
-                        
-                    }
-                    else {
-                        NSLog(@"Unable to insert data in SQLite Database");
-                    }
-                    
-                    
-                    NSLog(@"data Saved : %@",company);
                     
                     self.textFieldOne.text = @"";
                     self.textFieldTwo.text = @"";
                     self.textFieldThree.text = @"";
                     
                 }
+                else {
+                    [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+                    
+                }
+            }
+            else {
+                [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+                
             }
         }
         else {
-            NSLog(@"Enter data First to Save.");
+            [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+
         }
+        
     }
     
     else if(segmentControl.selectedSegmentIndex == 1) {
@@ -129,32 +133,40 @@
                     
                     if (result == 1) {
                         NSLog(@"Successfully inserted data");
+                        [self showAlertWithTitle:@"OK" message:[NSString stringWithFormat:@"Successfully inserted data"]];
+
                     }
-                    else if (result == 1){
-                        NSLog(@"Successfully inserted data");
-                        
-                    }
-                    else if (result == 1){
-                        NSLog(@"Successfully inserted data");
-                        
-                    }
+                   
                     else {
                         NSLog(@"Unable to insert data in SQLite Database");
+                        [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Unable to insert data"]];
                     }
                     
-                    
-                    NSLog(@"Task Saved : %@",company);
                     
                     self.textFieldOne.text = @"";
                     self.textFieldTwo.text = @"";
                     self.textFieldThree.text = @"";
                     
                 }
+                else {
+                    NSLog(@"Enter data First to Save.");
+                    [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+                    
+                }
+
+            }
+            else {
+                NSLog(@"Enter data First to Save.");
+                [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+                
             }
         }
         else {
             NSLog(@"Enter data First to Save.");
+            [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+
         }
+
     }
     else if(segmentControl.selectedSegmentIndex == 2) {
         
@@ -173,40 +185,58 @@
                     NSLog(@"%@",insertQuery);
                     
                     int result = [[CPDatabaseManager sharedManager]executeQuery:insertQuery];
-                    
+                    NSError *error;
                     
                     
                     
                     if (result == 1) {
                         NSLog(@"Successfully inserted data");
+                        [self showAlertWithTitle:@"Ok" message:@"Successfully inserted data"];
                     }
-                    else if (result == 1){
-                        NSLog(@"Successfully inserted data");
-                        
-                    }
-                    else if (result == 1){
-                        NSLog(@"Successfully inserted data");
-                        
-                    }
+                   
                     else {
                         NSLog(@"Unable to insert data in SQLite Database");
+                        [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"%@",error.localizedDescription]];
+
                     }
-                    
-                    
-                    NSLog(@"data Saved : %@",company);
                     
                     self.textFieldOne.text = @"";
                     self.textFieldTwo.text = @"";
                     self.textFieldThree.text = @"";
                     
                 }
+                else {
+                    NSLog(@"Enter data First to Save.");
+                    [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+                    
+                }
+               
+
+
             }
+            else {
+                NSLog(@"Enter data First to Save.");
+                [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+                
+            }
+           
         }
         else {
             NSLog(@"Enter data First to Save.");
+            [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+            }
+    
         }
+        else {
+            NSLog(@"Enter data First to Save.");
+            [self showAlertWithTitle:@"Error" message:[NSString stringWithFormat:@"Enter data first to save"]];
+        
     }
+
+
 }
+
+
 
 
 
@@ -243,30 +273,7 @@
 - (IBAction)segmentAction:(id)sender {
     
     segmentControl = sender;
-//    NSInteger i;
-//    switch (segmentControl.selectedSegmentIndex == i)
-//    {
-//        case 0:
-//            i=0;
-//            [self saveAction:sender];
-//            break;
-//        case 1:
-//            i=1;
-//            [self saveAction:sender];
-//            break;
-//        case 2:
-//            i=2;
-//            [self saveAction:sender];
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-    
-    
-    
-    
+
     if (segmentControl.selectedSegmentIndex == 0) {
         
         
@@ -311,25 +318,23 @@
     
     
     [self saveTaskWithSegment];
-//    if (segmentControl.selectedSegmentIndex == 0) {
-//        
-//        [self saveTask];
-//        
-//    }
-//    else if (segmentControl.selectedSegmentIndex == 1){
-//        
-//        [self saveTask];
-//        
-//    }
-//    else if (segmentControl.selectedSegmentIndex == 2){
-//        
-//        [self saveTask];
-//        
-//    }
-    
+
 }
 
 
+-(void) showAlertWithTitle:(NSString *)title
+                   message:(NSString *)message
+{
+    
+    UIAlertController *alert=[UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *OK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"ok");
+        
+    }];
+    
+    [alert addAction:OK];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 
 @end
